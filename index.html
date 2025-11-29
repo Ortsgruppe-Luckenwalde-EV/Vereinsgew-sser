@@ -259,27 +259,18 @@
             transform: rotate(90deg);
         }
 
-        .lake-details-section ul {
+        .lake-details-content {
+            padding: 15px 30px 15px 30px; 
+            background-color: #f9f9f9;
+        }
+
+        .lake-details-content ul {
             list-style-type: '🐠 ';
-            padding: 15px 30px 15px 50px;
+            padding: 0 0 10px 20px;
             margin: 0;
             line-height: 1.6;
-            background-color: #f9f9f9;
-            transition: opacity 0.4s ease-in-out;
         }
         
-        .lake-details-section:not([open]) ul {
-            opacity: 0;
-        }
-        
-        .lake-details-section[open] ul {
-            opacity: 1;
-        }
-
-        .lake-details-section ul li {
-            margin-bottom: 8px;
-        }
-
         .small-lake {
             opacity: 0.95;
             box-shadow: 0 0 10px rgba(255, 99, 71, 0.3);
@@ -303,7 +294,7 @@
             <li id="gewaesser-link-container">
                 <a href="#" onclick="showNotification(event, this)">Vereinsgewässer</a>
             </li>
-            <li><a href="#">Termine</a></li>
+            <li><a href="https://ortsgruppe-luckenwalde-ev.github.io/Termine/">Termine</a></li>
         </ul>
         <div id="notification">Der Fisch ist schon im Netz! 🎣</div>
     </nav>
@@ -346,60 +337,70 @@
                 <summary>
                     <span class="icon">▼</span> Vordersee (P 09 105) – **13,05 ha**
                 </summary>
-                <ul>
-                    <li><strong>Zugang:</strong> Einfach. Das Auto kann am Straßenrand abgestellt werden (ca. 50 m Fußweg).</li>
-                    <li><strong>Infrastruktur:</strong> Viele **gepflegte Angelstege** vorhanden.</li>
-                    <li><strong>Besonderheit:</strong> Über eine doppelte Kahnbreite mit dem Hintersee verbunden, daher **gleicher Fischbestand**.</li>
-                    <li><strong>Wels:</strong> Der Wels ist **freigegeben** zum Beangeln.</li>
-                    <li>**Tipp:** In der **Ortsgruppe Luckenwalde** kann ein Bungalow und ein Kahn gemietet werden – ideal für den Zugang zum Hintersee.</li>
-                </ul>
+                <div class="lake-details-content">
+                    <ul>
+                        <li><strong>Zugang:</strong> Einfach. Das Auto kann am Straßenrand abgestellt werden (ca. 50 m Fußweg).</li>
+                        <li><strong>Infrastruktur:</strong> Viele **gepflegte Angelstege** vorhanden.</li>
+                        <li><strong>Besonderheit:</strong> Über eine doppelte Kahnbreite mit dem Hintersee verbunden, daher **gleicher Fischbestand**.</li>
+                        <li><strong>Wels:</strong> Der Wels ist **freigegeben** zum Beangeln.</li>
+                        <li>**Tipp:** In der **Ortsgruppe Luckenwalde** kann ein Bungalow und ein Kahn gemietet werden – ideal für den Zugang zum Hintersee.</li>
+                    </ul>
+                </div>
             </details>
 
             <details class="lake-details-section">
                 <summary>
                     <span class="icon">▼</span> Hintersee (P 09 117) – **10,27 ha**
                 </summary>
-                <ul>
-                    <li><strong>Zugang:</strong> Das Befahren mit dem Auto ist untersagt. Das Ufer ist durch wenige oder defekte Stege erschwert.</li>
-                    <li><strong>Erreichbarkeit:</strong> Erfordert einen kleinen Fußmarsch, der sich aber lohnt.</li>
-                    <li><strong>Fischbestand:</strong> Exzellent – besonders **Karpfen, Aal, Zander, Hecht, Schleien und Welse**.</li>
-                    <li><strong>Wels-Situation:</strong> Aufgrund eines hohen Bestandes ist das Schonmaß **offiziell aufgehoben** zur Bestandsreduzierung. Exemplare von bis zu 2 Metern und 60 kg wurden gesichtet!</li>
-                </ul>
+                <div class="lake-details-content">
+                    <ul>
+                        <li><strong>Zugang:</strong> Das Befahren mit dem Auto ist untersagt. Das Ufer ist durch wenige oder defekte Stege erschwert.</li>
+                        <li><strong>Erreichbarkeit:</strong> Erfordert einen kleinen Fußmarsch, der sich aber lohnt.</li>
+                        <li><strong>Fischbestand:</strong> Exzellent – besonders **Karpfen, Aal, Zander, Hecht, Schleien und Welse**.</li>
+                        <li><strong>Wels-Situation:</strong> Aufgrund eines hohen Bestandes ist das Schonmaß **offiziell aufgehoben** zur Bestandsreduzierung. Exemplare von bis zu 2 Metern und 60 kg wurden gesichtet!</li>
+                    </ul>
+                </div>
             </details>
 
             <details class="lake-details-section">
                 <summary>
                     <span class="icon">▼</span> Glienicksee (P 09 106) – **4,84 ha**
                 </summary>
-                <ul>
-                    <li><strong>Tiefe:</strong> Mit rund 10 m der **tiefste** der fünf Seen.</li>
-                    <li><strong>Besatz:</strong> Regelmäßiger **Karpfenbesatz**.</li>
-                    <li><strong>Freizeit & Familie:</strong> Bietet einen **bewachten Parkplatz**, einen Campingplatz, einen großen Imbissstand und die Möglichkeit zum Baden – perfekt für die ganze Familie.</li>
-                </ul>
+                <div class="lake-details-content">
+                    <ul>
+                        <li><strong>Tiefe:</strong> Mit rund 10 m der **tiefste** der fünf Seen.</li>
+                        <li><strong>Besatz:</strong> Regelmäßiger **Karpfenbesatz**.</li>
+                        <li><strong>Freizeit & Familie:</strong> Bietet einen **bewachten Parkplatz**, einen Campingplatz, einen großen Imbissstand und die Möglichkeit zum Baden – perfekt für die ganze Familie.</li>
+                    </ul>
+                </div>
             </details>
 
             <details class="lake-details-section small-lake">
                 <summary>
                     <span class="icon">▼</span> Teufelssee (P 09 107) – **1,18 ha**
                 </summary>
-                <ul>
-                    <li><strong>Lage:</strong> Liegt mitten im Wald.</li>
-                    <li><strong>Größe:</strong> Der kleinste See und teilweise verlandet.</li>
-                    <li><strong>Besatz:</strong> Wird **nicht besetzt** und wenig beangelt.</li>
-                    <li><strong>Fischarten:</strong> Reiner **Schleien- und Karauschensee**. Ideal, wenn man Köderfische benötigt.</li>
-                </ul>
+                <div class="lake-details-content">
+                    <ul>
+                        <li><strong>Lage:</strong> Liegt mitten im Wald.</li>
+                        <li><strong>Größe:</strong> Der kleinste See und teilweise verlandet.</li>
+                        <li><strong>Besatz:</strong> Wird **nicht besetzt** und wenig beangelt.</li>
+                        <li><strong>Fischarten:</strong> Reiner **Schleien- und Karauschensee**. Ideal, wenn man Köderfische benötigt.</li>
+                    </ul>
+                </div>
             </details>
 
             <details class="lake-details-section">
                 <summary>
                     <span class="icon">▼</span> Bauernsee (P 09 108) – **10,16 ha**
                 </summary>
-                <ul>
-                    <li><strong>Zugang:</strong> Gut von den Stirnseiten und der Straßenseite zu beangeln. **Reichlich Stege** vorhanden.</li>
-                    <li><strong>Waldseite:</strong> Nur mit dem Kahn erreichbar.</li>
-                    <li><strong>Besatz:</strong> Regelmäßiger Fischbesatz; **Aal, Zander und Karpfen** sind in guten Stückzahlen vorhanden. Hecht und Wels kommen ebenfalls vor (Wels nicht offiziell gesetzt).</li>
-                    <li><strong>Tiefe:</strong> Tiefste Stelle ca. 5 m.</li>
-                </ul>
+                <div class="lake-details-content">
+                    <ul>
+                        <li><strong>Zugang:</strong> Gut von den Stirnseiten und der Straßenseite zu beangeln. **Reichlich Stege** vorhanden.</li>
+                        <li><strong>Waldseite:</strong> Nur mit dem Kahn erreichbar.</li>
+                        <li><strong>Besatz:</strong> Regelmäßiger Fischbesatz; **Aal, Zander und Karpfen** sind in guten Stückzahlen vorhanden. Hecht und Wels kommen ebenfalls vor (Wels nicht offiziell gesetzt).</li>
+                        <li><strong>Tiefe:</strong> Tiefste Stelle ca. 5 m.</li>
+                    </ul>
+                </div>
             </details>
             
         </div>
