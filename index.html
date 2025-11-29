@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vereinsgewässer - Ortsgruppe Luckenwalde e.V.</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght=400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         /* FARB PALETTE */
@@ -69,7 +69,7 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
             animation: fadeIn 0.6s ease-out 0.1s backwards; 
-            position: relative; /* WICHTIG: Erzeugt einen Kontext für das Pop-up */
+            position: relative; 
         }
         
         .nav-bar ul {
@@ -104,9 +104,8 @@
         /* ------------------ POPUP-STYLING ------------------ */
         #notification {
             position: absolute;
-            /* Positioniert das Pop-up direkt unter "Vereinsgewässer" */
             top: 100%; 
-            left: 50%; /* Startpunkt links (wird durch JS/CSS korrigiert) */
+            left: 50%; 
             
             z-index: 1000;
             opacity: 0;
@@ -119,9 +118,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             font-weight: bold;
             text-align: center;
-            white-space: nowrap; /* Verhindert Zeilenumbruch */
+            white-space: nowrap; 
             
-            /* Sanfte Animationseigenschaften */
             transition: opacity 0.3s, visibility 0.3s;
         }
         
@@ -129,7 +127,7 @@
         .show-notification {
             visibility: visible !important;
             opacity: 1 !important;
-            animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards; /* 0.3s rein, 3s halten, 0.3s raus */
+            animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards;
         }
         /* ------------------ ENDE POPUP-STYLING ------------------ */
 
@@ -161,7 +159,6 @@
         }
 
         /* ------------------ GEWÄSSER SPEZIFISCHES DESIGN ------------------ */
-        /* (Unverändert) */
 
         .section-title {
             color: var(--color-primary);
@@ -301,12 +298,12 @@
 
     <nav class="nav-bar">
         <ul>
-            <li><a href="index.html">Startseite</a></li>
-            <li><a href="ansprechpartner.html">Ansprechpartner</a></li>
+            <li><a href="#">Startseite</a></li> 
+            <li><a href="#">Ansprechpartner</a></li> 
             <li id="gewaesser-link-container">
-                <a href="gewaesser.html" onclick="showNotification(event, this)">Vereinsgewässer</a>
+                <a href="#" onclick="showNotification(event, this)">Vereinsgewässer</a>
             </li>
-            <li><a href="termine.html">Termine</a></li>
+            <li><a href="#">Termine</a></li>
         </ul>
         <div id="notification">Der Fisch ist schon im Netz! 🎣</div>
     </nav>
@@ -411,38 +408,33 @@
 
     <script>
         function showNotification(event, linkElement) {
-            // Verhindert das sofortige Neuladen der Seite, damit das Popup sichtbar ist
+            // Verhindert das Standardverhalten des Links (also KEINE Weiterleitung)
             event.preventDefault(); 
             
             const notification = document.getElementById('notification');
             
+            if (notification.classList.contains('show-notification')) {
+                return;
+            }
+
             // 1. Position des angeklickten Links ermitteln
             const rect = linkElement.getBoundingClientRect();
             const navBarRect = document.querySelector('.nav-bar').getBoundingClientRect();
             
             // 2. Pop-up relativ zur Navigationsleiste positionieren (zentriert unter dem Link)
-            // (rect.left + rect.right) / 2 = Mitte des Links
-            // navBarRect.left wird abgezogen, da die Nav-Bar den Kontext bildet
             const centerPosition = ((rect.left + rect.right) / 2) - navBarRect.left;
             
             // 3. Animation starten und positionieren
             notification.style.left = centerPosition + 'px';
-            notification.style.transform = 'translateX(-50%)'; // Zentriert das Pop-up über seiner Mitte
+            notification.style.transform = 'translateX(-50%)'; 
 
             // Zeigt das Pop-up an (CSS-Klasse für Animation wird hinzugefügt)
             notification.classList.add('show-notification');
 
-            // 4. Timer starten: Nach 3 Sekunden verschwindet das Pop-up und die Seite lädt
+            // 4. Timer starten: Nach 3 Sekunden Pop-up ausblenden
             setTimeout(() => {
                 // Entfernt die Animationsklasse
                 notification.classList.remove('show-notification');
-
-                // Lädt die Seite (nachdem das Pop-up verschwunden ist)
-                // Wir warten hier 300ms (0.3s), damit der fadeOut-Effekt im CSS abgeschlossen ist
-                setTimeout(() => {
-                    window.location.href = linkElement.href;
-                }, 300); 
-
             }, 3000); // 3000 Millisekunden = 3 Sekunden
         }
     </script>
