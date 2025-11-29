@@ -34,7 +34,7 @@
             color: var(--color-text);
         }
         
-        /* ------------------ BASIS DESIGN ------------------ */
+        /* ------------------ BASIS DESIGN (Desktop/Standard) ------------------ */
         
         /* HEADER (Kopfbereich) */
         .header-container {
@@ -63,7 +63,7 @@
             object-fit: cover; 
         }
 
-        /* NAVIGATION (Reiter) */
+        /* NAVIGATION (Desktop) */
         .nav-bar {
             background-color: var(--color-secondary);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -76,7 +76,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            display: flex;
+            display: flex; /* Links horizontal anordnen */
             justify-content: center;
         }
         
@@ -101,16 +101,14 @@
             border-radius: 4px; 
         }
 
-        /* ------------------ POPUP-STYLING ------------------ */
+        /* POPUP-STYLING (Unverändert) */
         #notification {
             position: absolute;
             top: 100%; 
             left: 50%; 
-            
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            
             background-color: var(--color-primary); 
             color: white;
             padding: 10px 20px;
@@ -119,20 +117,16 @@
             font-weight: bold;
             text-align: center;
             white-space: nowrap; 
-            
             transition: opacity 0.3s, visibility 0.3s;
         }
         
-        /* Klasse für das Anzeigen und Animieren */
         .show-notification {
             visibility: visible !important;
             opacity: 1 !important;
             animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards;
         }
-        /* ------------------ ENDE POPUP-STYLING ------------------ */
 
-
-        /* CONTENT (Inhaltsbereich) */
+        /* CONTENT */
         .content {
             padding: 30px; 
             margin: 30px auto; 
@@ -145,7 +139,6 @@
             transition: box-shadow 0.3s ease;
         }
 
-        /* Sanfter Schattentausch beim Hover über den Hauptinhalt */
         .content:hover {
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
@@ -158,8 +151,7 @@
             margin-top: 30px;
         }
 
-        /* ------------------ GEWÄSSER SPEZIFISCHES DESIGN ------------------ */
-
+        /* GEWÄSSER SPEZIFISCHES DESIGN (Unverändert) */
         .section-title {
             color: var(--color-primary);
             font-family: 'Oswald', sans-serif;
@@ -170,7 +162,6 @@
             text-align: center;
         }
 
-        /* Tabellendesign für die Seen-Daten */
         .lake-data-container {
             margin-bottom: 40px;
             border: 1px solid var(--color-background);
@@ -204,66 +195,6 @@
             background-color: #f0f8ff;
         }
 
-        /* AKKORDEON STYLES (Details Sektion) */
-
-        .accordion-group {
-            margin-top: 30px;
-        }
-
-        .lake-details-section {
-            background-color: white;
-            border: 1px solid var(--color-primary);
-            border-radius: 8px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: box-shadow 0.3s ease, border-color 0.3s ease; 
-        }
-
-        .lake-details-section:hover,
-        .lake-details-section[open] {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            border-color: var(--color-secondary); 
-        }
-
-        .lake-details-section summary {
-            display: flex;
-            align-items: center;
-            padding: 18px 25px;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: var(--color-secondary);
-            background-color: var(--color-background);
-            border-bottom: 1px solid var(--color-primary);
-            user-select: none;
-            transition: background-color 0.3s ease;
-        }
-
-        .lake-details-section summary:hover {
-            background-color: #d1e5e4;
-        }
-
-        .lake-details-section summary::-webkit-details-marker,
-        .lake-details-section summary::marker {
-            display: none; 
-        }
-
-        .lake-details-section .icon {
-            margin-right: 15px;
-            transition: transform 0.3s ease;
-            color: var(--color-primary);
-        }
-
-        .lake-details-section[open] .icon {
-            transform: rotate(90deg);
-        }
-
-        .lake-details-content {
-            padding: 15px 30px 15px 30px; 
-            background-color: #f9f9f9;
-        }
-
         .lake-details-content ul {
             list-style-type: '🐠 ';
             padding: 0 0 10px 20px;
@@ -271,9 +202,67 @@
             line-height: 1.6;
         }
         
-        .small-lake {
-            opacity: 0.95;
-            box-shadow: 0 0 10px rgba(255, 99, 71, 0.3);
+        /* ------------------ RESPONSIVE ANPASSUNGEN (Mobile First) ------------------ */
+
+        /* Gilt für alle Geräte, aber besonders für kleine Bildschirme */
+        @media (max-width: 768px) {
+            
+            /* Header-Anpassung */
+            .header-container {
+                padding: 10px 15px;
+                flex-direction: column; /* Logo und Titel vertikal anordnen */
+                text-align: center;
+            }
+
+            .logo {
+                height: 45px; /* Logo verkleinern */
+                margin-right: 0;
+                margin-bottom: 8px; /* Kleiner Abstand zum Titel */
+            }
+
+            h1 {
+                font-size: 1.8em; /* Titel verkleinern */
+            }
+
+            /* Navigations-Anpassung */
+            .nav-bar ul {
+                flex-direction: column; /* Menüpunkte untereinander */
+            }
+
+            .nav-bar a {
+                padding: 12px 15px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1); /* Trennlinie zwischen den Links */
+            }
+
+            .nav-bar a:hover {
+                transform: none; /* Keine vertikale Animation auf Mobile */
+            }
+
+            /* Content-Anpassung */
+            .content {
+                padding: 15px; /* Weniger Innenabstand */
+                margin: 15px; /* Weniger Außenabstand */
+            }
+
+            /* Tabellen-Anpassung (Um Scrollen auf Mobile zu vermeiden) */
+            .lake-data-container {
+                /* Optional: Fügen Sie einen horizontalen Scrollbalken hinzu, wenn die Tabelle zu breit ist */
+                overflow-x: auto;
+            }
+            .lake-table {
+                font-size: 0.9em;
+                min-width: 400px; /* Stellt sicher, dass die Tabelle nicht zu stark komprimiert wird */
+            }
+            
+            /* Accordion-Anpassung */
+            .lake-details-section summary {
+                padding: 15px;
+                font-size: 1.1em;
+            }
+
+            .lake-details-content {
+                padding: 10px 15px;
+            }
         }
     </style>
 </head>
