@@ -21,6 +21,10 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-10px); }
+        }
 
         body {
             background-color: var(--color-background);
@@ -39,7 +43,6 @@
             display: flex;
             align-items: center; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-            /* Animation beim Laden */
             animation: fadeIn 0.5s ease-out; 
         }
         
@@ -65,8 +68,8 @@
             background-color: var(--color-secondary);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
-            /* Animation beim Laden mit leichtem Delay */
             animation: fadeIn 0.6s ease-out 0.1s backwards; 
+            position: relative; /* WICHTIG: Erzeugt einen Kontext für das Pop-up */
         }
         
         .nav-bar ul {
@@ -88,16 +91,48 @@
             padding: 15px 25px;
             font-family: 'Oswald', sans-serif;
             font-size: 1.1em;
-            /* Sanfter Übergang für Hover-Effekt */
             transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s;
         }
         
         .nav-bar a:hover {
             background-color: #5d4037; 
-            transform: translateY(-2px); /* Apple-Style Lift */
+            transform: translateY(-2px); 
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
             border-radius: 4px; 
         }
+
+        /* ------------------ POPUP-STYLING ------------------ */
+        #notification {
+            position: absolute;
+            /* Positioniert das Pop-up direkt unter "Vereinsgewässer" */
+            top: 100%; 
+            left: 50%; /* Startpunkt links (wird durch JS/CSS korrigiert) */
+            
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            
+            background-color: var(--color-primary); 
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            font-weight: bold;
+            text-align: center;
+            white-space: nowrap; /* Verhindert Zeilenumbruch */
+            
+            /* Sanfte Animationseigenschaften */
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        /* Klasse für das Anzeigen und Animieren */
+        .show-notification {
+            visibility: visible !important;
+            opacity: 1 !important;
+            animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards; /* 0.3s rein, 3s halten, 0.3s raus */
+        }
+        /* ------------------ ENDE POPUP-STYLING ------------------ */
+
 
         /* CONTENT (Inhaltsbereich) */
         .content {
@@ -108,7 +143,6 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: left; 
-            /* Animation beim Laden mit leichtem Delay */
             animation: fadeIn 0.7s ease-out 0.2s backwards; 
             transition: box-shadow 0.3s ease;
         }
@@ -127,6 +161,7 @@
         }
 
         /* ------------------ GEWÄSSER SPEZIFISCHES DESIGN ------------------ */
+        /* (Unverändert) */
 
         .section-title {
             color: var(--color-primary);
@@ -185,19 +220,15 @@
             margin-bottom: 12px;
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            /* Übergang für Schatten und Randfarbe */
             transition: box-shadow 0.3s ease, border-color 0.3s ease; 
         }
 
-        /* Besserer "Fokus"-Effekt beim Öffnen oder Hovern */
         .lake-details-section:hover,
         .lake-details-section[open] {
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            border-color: var(--color-secondary); /* Akzentfarbe als Fokus */
+            border-color: var(--color-secondary); 
         }
 
-
-        /* Stil für den anklickbaren Titel (Summary) */
         .lake-details-section summary {
             display: flex;
             align-items: center;
@@ -212,45 +243,36 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Hover-Effekt auf dem Titel */
         .lake-details-section summary:hover {
             background-color: #d1e5e4;
         }
 
-        /* Standard-Marker ausblenden */
         .lake-details-section summary::-webkit-details-marker,
         .lake-details-section summary::marker {
             display: none; 
         }
 
-        /* Das eigene Icon (der Pfeil) */
         .lake-details-section .icon {
             margin-right: 15px;
             transition: transform 0.3s ease;
             color: var(--color-primary);
         }
 
-        /* Icon-Drehung, wenn die Details geöffnet sind */
         .lake-details-section[open] .icon {
             transform: rotate(90deg);
         }
 
-        /* Inhalt unter dem Titel (WICHTIG für sanftes Aufklappen) */
         .lake-details-section ul {
             list-style-type: '🐠 ';
             padding: 15px 30px 15px 50px;
             margin: 0;
             line-height: 1.6;
             background-color: #f9f9f9;
-            /* Trick: Maximale Höhe animieren, um den Slide-Effekt zu imitieren */
-            /* Bei modernen Browsern wird dies besser durch height/max-height gelöst, aber hier für einfache Kompatibilität */
             transition: opacity 0.4s ease-in-out;
         }
         
-        /* Macht den Inhalt unsichtbar, bevor er aufklappt (für sanften Fade-In) */
         .lake-details-section:not([open]) ul {
             opacity: 0;
-            /* overflow: hidden; */ /* Optional, um sicherzustellen, dass nichts durchscheint */
         }
         
         .lake-details-section[open] ul {
@@ -261,8 +283,7 @@
             margin-bottom: 8px;
         }
 
-        /* Spezielles Design für den Teufelssee */
-        .lake-details-section.small-lake {
+        .small-lake {
             opacity: 0.95;
             box-shadow: 0 0 10px rgba(255, 99, 71, 0.3);
         }
@@ -282,13 +303,15 @@
         <ul>
             <li><a href="index.html">Startseite</a></li>
             <li><a href="ansprechpartner.html">Ansprechpartner</a></li>
-            <li><a href="gewaesser.html">Vereinsgewässer</a></li>
+            <li id="gewaesser-link-container">
+                <a href="gewaesser.html" onclick="showNotification(event, this)">Vereinsgewässer</a>
+            </li>
             <li><a href="termine.html">Termine</a></li>
         </ul>
+        <div id="notification">Der Fisch ist schon im Netz! 🎣</div>
     </nav>
 
     <div class="content">
-
         <h2 class="section-title">🎣 Unsere Vereinsgewässer: Die Seenplatte Dobbrikow</h2>
 
         <p>
@@ -385,6 +408,44 @@
         </div>
 
     </div>
+
+    <script>
+        function showNotification(event, linkElement) {
+            // Verhindert das sofortige Neuladen der Seite, damit das Popup sichtbar ist
+            event.preventDefault(); 
+            
+            const notification = document.getElementById('notification');
+            
+            // 1. Position des angeklickten Links ermitteln
+            const rect = linkElement.getBoundingClientRect();
+            const navBarRect = document.querySelector('.nav-bar').getBoundingClientRect();
+            
+            // 2. Pop-up relativ zur Navigationsleiste positionieren (zentriert unter dem Link)
+            // (rect.left + rect.right) / 2 = Mitte des Links
+            // navBarRect.left wird abgezogen, da die Nav-Bar den Kontext bildet
+            const centerPosition = ((rect.left + rect.right) / 2) - navBarRect.left;
+            
+            // 3. Animation starten und positionieren
+            notification.style.left = centerPosition + 'px';
+            notification.style.transform = 'translateX(-50%)'; // Zentriert das Pop-up über seiner Mitte
+
+            // Zeigt das Pop-up an (CSS-Klasse für Animation wird hinzugefügt)
+            notification.classList.add('show-notification');
+
+            // 4. Timer starten: Nach 3 Sekunden verschwindet das Pop-up und die Seite lädt
+            setTimeout(() => {
+                // Entfernt die Animationsklasse
+                notification.classList.remove('show-notification');
+
+                // Lädt die Seite (nachdem das Pop-up verschwunden ist)
+                // Wir warten hier 300ms (0.3s), damit der fadeOut-Effekt im CSS abgeschlossen ist
+                setTimeout(() => {
+                    window.location.href = linkElement.href;
+                }, 300); 
+
+            }, 3000); // 3000 Millisekunden = 3 Sekunden
+        }
+    </script>
 
 </body>
 </html>
