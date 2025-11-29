@@ -16,6 +16,12 @@
             --color-text: #333;
         }
 
+        /* KEYFRAMES FÜR COOLE ANZEIGE */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         body {
             background-color: var(--color-background);
             margin: 0; 
@@ -33,6 +39,8 @@
             display: flex;
             align-items: center; 
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+            /* Animation beim Laden */
+            animation: fadeIn 0.5s ease-out; 
         }
         
         h1 {
@@ -57,6 +65,8 @@
             background-color: var(--color-secondary);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
+            /* Animation beim Laden mit leichtem Delay */
+            animation: fadeIn 0.6s ease-out 0.1s backwards; 
         }
         
         .nav-bar ul {
@@ -78,12 +88,13 @@
             padding: 15px 25px;
             font-family: 'Oswald', sans-serif;
             font-size: 1.1em;
+            /* Sanfter Übergang für Hover-Effekt */
             transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s;
         }
         
         .nav-bar a:hover {
             background-color: #5d4037; 
-            transform: translateY(-2px);
+            transform: translateY(-2px); /* Apple-Style Lift */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
             border-radius: 4px; 
         }
@@ -97,6 +108,14 @@
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-align: left; 
+            /* Animation beim Laden mit leichtem Delay */
+            animation: fadeIn 0.7s ease-out 0.2s backwards; 
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Sanfter Schattentausch beim Hover über den Hauptinhalt */
+        .content:hover {
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
         
         h2 {
@@ -166,8 +185,17 @@
             margin-bottom: 12px;
             overflow: hidden;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            /* Übergang für Schatten und Randfarbe */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease; 
         }
+
+        /* Besserer "Fokus"-Effekt beim Öffnen oder Hovern */
+        .lake-details-section:hover,
+        .lake-details-section[open] {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            border-color: var(--color-secondary); /* Akzentfarbe als Fokus */
+        }
+
 
         /* Stil für den anklickbaren Titel (Summary) */
         .lake-details-section summary {
@@ -181,6 +209,7 @@
             background-color: var(--color-background);
             border-bottom: 1px solid var(--color-primary);
             user-select: none;
+            transition: background-color 0.3s ease;
         }
 
         /* Hover-Effekt auf dem Titel */
@@ -206,13 +235,26 @@
             transform: rotate(90deg);
         }
 
-        /* Inhalt unter dem Titel */
+        /* Inhalt unter dem Titel (WICHTIG für sanftes Aufklappen) */
         .lake-details-section ul {
             list-style-type: '🐠 ';
             padding: 15px 30px 15px 50px;
             margin: 0;
             line-height: 1.6;
             background-color: #f9f9f9;
+            /* Trick: Maximale Höhe animieren, um den Slide-Effekt zu imitieren */
+            /* Bei modernen Browsern wird dies besser durch height/max-height gelöst, aber hier für einfache Kompatibilität */
+            transition: opacity 0.4s ease-in-out;
+        }
+        
+        /* Macht den Inhalt unsichtbar, bevor er aufklappt (für sanften Fade-In) */
+        .lake-details-section:not([open]) ul {
+            opacity: 0;
+            /* overflow: hidden; */ /* Optional, um sicherzustellen, dass nichts durchscheint */
+        }
+        
+        .lake-details-section[open] ul {
+            opacity: 1;
         }
 
         .lake-details-section ul li {
@@ -222,7 +264,7 @@
         /* Spezielles Design für den Teufelssee */
         .lake-details-section.small-lake {
             opacity: 0.95;
-            box-shadow: 0 0 10px rgba(255, 99, 71, 0.3); /* dezenter oranger Schatten */
+            box-shadow: 0 0 10px rgba(255, 99, 71, 0.3);
         }
     </style>
 </head>
@@ -250,7 +292,7 @@
         <h2 class="section-title">🎣 Unsere Vereinsgewässer: Die Seenplatte Dobbrikow</h2>
 
         <p>
-            Die Seenplatte Dobbrikow ist unser lokales Naherholungszentrum und liegt in <strong>14947 Dobbrikow</strong>. Obwohl die Seenplatte historisch sieben Seen umfasste, konzentrieren wir uns heute auf die fünf verbliebenen, die alle zum Angeln freigegeben sind.
+            Die Seenplatte Dobbrikow liegt in <strong>14947 Dobbrikow</strong>. Obwohl die Seenplatte historisch sieben Seen umfasste, konzentrieren wir uns heute auf die fünf verbliebenen, die alle zum Angeln freigegeben sind.
         </p>
 
         <div class="lake-data-container">
@@ -289,7 +331,7 @@
                     <li><strong>Infrastruktur:</strong> Viele **gepflegte Angelstege** vorhanden.</li>
                     <li><strong>Besonderheit:</strong> Über eine doppelte Kahnbreite mit dem Hintersee verbunden, daher **gleicher Fischbestand**.</li>
                     <li><strong>Wels:</strong> Der Wels ist **freigegeben** zum Beangeln.</li>
-                    <li><strong>Tipp:</strong> In der Anglerkolonie "Petri Heil" kann ein Bungalow und ein Kahn gemietet werden – ideal für den Zugang zum Hintersee.</li>
+                    <li>**Tipp:** In der **Ortsgruppe Luckenwalde** kann ein Bungalow und ein Kahn gemietet werden – ideal für den Zugang zum Hintersee.</li>
                 </ul>
             </details>
 
