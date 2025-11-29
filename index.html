@@ -18,12 +18,12 @@
 
         /* KEYFRAMES FÜR COOLE ANZEIGE */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         @keyframes fadeOut {
-            from { opacity: 1; transform: translateY(0); }
-            to { opacity: 0; transform: translateY(-10px); }
+            from { opacity: 1; }
+            to { opacity: 0; }
         }
 
         body {
@@ -127,6 +127,7 @@
         .show-notification {
             visibility: visible !important;
             opacity: 1 !important;
+            /* Keyframes nur noch für Fade-In/Fade-Out */
             animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards;
         }
         /* ------------------ ENDE POPUP-STYLING ------------------ */
