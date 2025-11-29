@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ortsgruppe Luckenwalde e.V. - Anglerverein</title>
+    <title>Vereinsgewässer - Ortsgruppe Luckenwalde e.V.</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Roboto:wght=400;700&display=swap" rel="stylesheet">
     
     <style>
         /* FARB PALETTE */
@@ -17,13 +17,14 @@
         }
 
         body {
-            /* Das body padding wurde entfernt, um den Header bündig zu halten */
             background-color: var(--color-background);
             margin: 0; 
             padding: 0; 
             font-family: 'Roboto', sans-serif;
             color: var(--color-text);
         }
+        
+        /* ------------------ BASIS DESIGN ------------------ */
         
         /* HEADER (Kopfbereich) */
         .header-container {
@@ -77,20 +78,152 @@
             padding: 15px 25px;
             font-family: 'Oswald', sans-serif;
             font-size: 1.1em;
-            /* Für sanfte Animation */
             transition: background-color 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s;
         }
         
-        /* APPLE-STYLE HOVER EFFEKT */
         .nav-bar a:hover {
             background-color: #5d4037; 
-            transform: translateY(-2px); /* Hebt den Reiter subtil an */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); /* Fügen einen weichen Schatten hinzu */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); 
             border-radius: 4px; 
         }
 
-        /* **ENTFERNTE STYLES** (CONTENT, WELCOME-TITLE, etc. sind nicht mehr nötig) */
+        /* CONTENT (Inhaltsbereich) */
+        .content {
+            padding: 30px; 
+            margin: 30px auto; 
+            max-width: 900px; 
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left; 
+        }
         
+        h2 {
+            color: var(--color-primary);
+            font-family: 'Oswald', sans-serif;
+            border-bottom: 3px solid var(--color-background); 
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+
+        /* ------------------ GEWÄSSER SPEZIFISCHES DESIGN ------------------ */
+
+        .section-title {
+            color: var(--color-primary);
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            border-bottom: 4px solid var(--color-secondary);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        /* Tabellendesign für die Seen-Daten */
+        .lake-data-container {
+            margin-bottom: 40px;
+            border: 1px solid var(--color-background);
+            background-color: #f7fcfc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .lake-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .lake-table th, .lake-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .lake-table th {
+            background-color: var(--color-primary);
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .lake-table tr:nth-child(even) {
+            background-color: #f0f8ff;
+        }
+
+        /* AKKORDEON STYLES (Details Sektion) */
+
+        .accordion-group {
+            margin-top: 30px;
+        }
+
+        .lake-details-section {
+            background-color: white;
+            border: 1px solid var(--color-primary);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Stil für den anklickbaren Titel (Summary) */
+        .lake-details-section summary {
+            display: flex;
+            align-items: center;
+            padding: 18px 25px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--color-secondary);
+            background-color: var(--color-background);
+            border-bottom: 1px solid var(--color-primary);
+            user-select: none;
+        }
+
+        /* Hover-Effekt auf dem Titel */
+        .lake-details-section summary:hover {
+            background-color: #d1e5e4;
+        }
+
+        /* Standard-Marker ausblenden */
+        .lake-details-section summary::-webkit-details-marker,
+        .lake-details-section summary::marker {
+            display: none; 
+        }
+
+        /* Das eigene Icon (der Pfeil) */
+        .lake-details-section .icon {
+            margin-right: 15px;
+            transition: transform 0.3s ease;
+            color: var(--color-primary);
+        }
+
+        /* Icon-Drehung, wenn die Details geöffnet sind */
+        .lake-details-section[open] .icon {
+            transform: rotate(90deg);
+        }
+
+        /* Inhalt unter dem Titel */
+        .lake-details-section ul {
+            list-style-type: '🐠 ';
+            padding: 15px 30px 15px 50px;
+            margin: 0;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        .lake-details-section ul li {
+            margin-bottom: 8px;
+        }
+
+        /* Spezielles Design für den Teufelssee */
+        .lake-details-section.small-lake {
+            opacity: 0.95;
+            box-shadow: 0 0 10px rgba(255, 99, 71, 0.3); /* dezenter oranger Schatten */
+        }
     </style>
 </head>
 <body>
@@ -112,5 +245,104 @@
         </ul>
     </nav>
 
-    </body>
+    <div class="content">
+
+        <h2 class="section-title">🎣 Unsere Vereinsgewässer: Die Seenplatte Dobbrikow</h2>
+
+        <p>
+            Die Seenplatte Dobbrikow ist unser lokales Naherholungszentrum und liegt in <strong>14947 Dobbrikow</strong>. Obwohl die Seenplatte historisch sieben Seen umfasste, konzentrieren wir uns heute auf die fünf verbliebenen, die alle zum Angeln freigegeben sind.
+        </p>
+
+        <div class="lake-data-container">
+            <h3>Überblick der Gewässer</h3>
+            
+            <table class="lake-table">
+                <thead>
+                    <tr>
+                        <th>Gewässer</th>
+                        <th>Gewässer-Nr.</th>
+                        <th>Fläche (Hektar)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Vordersee</td><td>P 09 105</td><td>13,05 ha</td></tr>
+                    <tr><td>Hintersee</td><td>P 09 117</td><td>10,27 ha</td></tr>
+                    <tr><td>Glienicksee</td><td>P 09 106</td><td>4,84 ha</td></tr>
+                    <tr><td>Teufelssee</td><td>P 09 107</td><td>1,18 ha</td></tr>
+                    <tr><td>Bauernsee</td><td>P 09 108</td><td>10,16 ha</td></tr>
+                </tbody>
+            </table>
+            
+            <p class="summary-note">
+                Klicken Sie auf den Namen eines Sees, um detaillierte Informationen zu erfahren:
+            </p>
+        </div>
+
+        <div class="accordion-group">
+            
+            <details class="lake-details-section">
+                <summary>
+                    <span class="icon">▼</span> Vordersee (P 09 105) – **13,05 ha**
+                </summary>
+                <ul>
+                    <li><strong>Zugang:</strong> Einfach. Das Auto kann am Straßenrand abgestellt werden (ca. 50 m Fußweg).</li>
+                    <li><strong>Infrastruktur:</strong> Viele **gepflegte Angelstege** vorhanden.</li>
+                    <li><strong>Besonderheit:</strong> Über eine doppelte Kahnbreite mit dem Hintersee verbunden, daher **gleicher Fischbestand**.</li>
+                    <li><strong>Wels:</strong> Der Wels ist **freigegeben** zum Beangeln.</li>
+                    <li><strong>Tipp:</strong> In der Anglerkolonie "Petri Heil" kann ein Bungalow und ein Kahn gemietet werden – ideal für den Zugang zum Hintersee.</li>
+                </ul>
+            </details>
+
+            <details class="lake-details-section">
+                <summary>
+                    <span class="icon">▼</span> Hintersee (P 09 117) – **10,27 ha**
+                </summary>
+                <ul>
+                    <li><strong>Zugang:</strong> Das Befahren mit dem Auto ist untersagt. Das Ufer ist durch wenige oder defekte Stege erschwert.</li>
+                    <li><strong>Erreichbarkeit:</strong> Erfordert einen kleinen Fußmarsch, der sich aber lohnt.</li>
+                    <li><strong>Fischbestand:</strong> Exzellent – besonders **Karpfen, Aal, Zander, Hecht, Schleien und Welse**.</li>
+                    <li><strong>Wels-Situation:</strong> Aufgrund eines hohen Bestandes ist das Schonmaß **offiziell aufgehoben** zur Bestandsreduzierung. Exemplare von bis zu 2 Metern und 60 kg wurden gesichtet!</li>
+                </ul>
+            </details>
+
+            <details class="lake-details-section">
+                <summary>
+                    <span class="icon">▼</span> Glienicksee (P 09 106) – **4,84 ha**
+                </summary>
+                <ul>
+                    <li><strong>Tiefe:</strong> Mit rund 10 m der **tiefste** der fünf Seen.</li>
+                    <li><strong>Besatz:</strong> Regelmäßiger **Karpfenbesatz**.</li>
+                    <li><strong>Freizeit & Familie:</strong> Bietet einen **bewachten Parkplatz**, einen Campingplatz, einen großen Imbissstand und die Möglichkeit zum Baden – perfekt für die ganze Familie.</li>
+                </ul>
+            </details>
+
+            <details class="lake-details-section small-lake">
+                <summary>
+                    <span class="icon">▼</span> Teufelssee (P 09 107) – **1,18 ha**
+                </summary>
+                <ul>
+                    <li><strong>Lage:</strong> Liegt mitten im Wald.</li>
+                    <li><strong>Größe:</strong> Der kleinste See und teilweise verlandet.</li>
+                    <li><strong>Besatz:</strong> Wird **nicht besetzt** und wenig beangelt.</li>
+                    <li><strong>Fischarten:</strong> Reiner **Schleien- und Karauschensee**. Ideal, wenn man Köderfische benötigt.</li>
+                </ul>
+            </details>
+
+            <details class="lake-details-section">
+                <summary>
+                    <span class="icon">▼</span> Bauernsee (P 09 108) – **10,16 ha**
+                </summary>
+                <ul>
+                    <li><strong>Zugang:</strong> Gut von den Stirnseiten und der Straßenseite zu beangeln. **Reichlich Stege** vorhanden.</li>
+                    <li><strong>Waldseite:</strong> Nur mit dem Kahn erreichbar.</li>
+                    <li><strong>Besatz:</strong> Regelmäßiger Fischbesatz; **Aal, Zander und Karpfen** sind in guten Stückzahlen vorhanden. Hecht und Wels kommen ebenfalls vor (Wels nicht offiziell gesetzt).</li>
+                    <li><strong>Tiefe:</strong> Tiefste Stelle ca. 5 m.</li>
+                </ul>
+            </details>
+            
+        </div>
+
+    </div>
+
+</body>
 </html>
