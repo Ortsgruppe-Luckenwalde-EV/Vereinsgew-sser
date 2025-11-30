@@ -21,10 +21,6 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        @keyframes fadeOut {
-            from { opacity: 0; }
-            to { opacity: 0; }
-        }
 
         body {
             background-color: var(--color-background);
@@ -101,30 +97,7 @@
             border-radius: 4px; 
         }
 
-        /* POPUP-STYLING (Unverändert) */
-        #notification {
-            position: absolute;
-            top: 100%; 
-            left: 50%; 
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            background-color: var(--color-primary); 
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            font-weight: bold;
-            text-align: center;
-            white-space: nowrap; 
-            transition: opacity 0.3s, visibility 0.3s;
-        }
-        
-        .show-notification {
-            visibility: visible !important;
-            opacity: 1 !important;
-            animation: fadeIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards;
-        }
+        /* Das Pop-up-Styling ist entfernt */
 
         /* CONTENT */
         .content {
@@ -284,13 +257,12 @@
         <ul>
             <li><a href="https://ortsgruppe-luckenwalde-ev.github.io/Haubtseite/">Startseite</a></li> 
             <li><a href="https://ortsgruppe-luckenwalde-ev.github.io/ansprechpartner/">Ansprechpartner</a></li> 
-            <li id="gewaesser-link-container">
-                <a href="#" onclick="showNotification(event, this)">Vereinsgewässer</a>
+            <li>
+                <a href="#">Vereinsgewässer</a>
             </li>
             <li><a href="https://ortsgruppe-luckenwalde-ev.github.io/Termine/">Termine</a></li>
         </ul>
-        <div id="notification">Der Fisch ist schon im Netz! 🎣</div>
-    </nav>
+        </nav>
 
     <div class="content">
         <h2 class="section-title">🎣 Unsere Vereinsgewässer: Die Seenplatte Dobbrikow</h2>
@@ -400,38 +372,5 @@
 
     </div>
 
-    <script>
-        function showNotification(event, linkElement) {
-            // Verhindert das Standardverhalten des Links (also KEINE Weiterleitung)
-            event.preventDefault(); 
-            
-            const notification = document.getElementById('notification');
-            
-            if (notification.classList.contains('show-notification')) {
-                return;
-            }
-
-            // 1. Position des angeklickten Links ermitteln
-            const rect = linkElement.getBoundingClientRect();
-            const navBarRect = document.querySelector('.nav-bar').getBoundingClientRect();
-            
-            // 2. Pop-up relativ zur Navigationsleiste positionieren (zentriert unter dem Link)
-            const centerPosition = ((rect.left + rect.right) / 2) - navBarRect.left;
-            
-            // 3. Animation starten und positionieren
-            notification.style.left = centerPosition + 'px';
-            notification.style.transform = 'translateX(-50%)'; 
-
-            // Zeigt das Pop-up an (CSS-Klasse für Animation wird hinzugefügt)
-            notification.classList.add('show-notification');
-
-            // 4. Timer starten: Nach 3 Sekunden Pop-up ausblenden
-            setTimeout(() => {
-                // Entfernt die Animationsklasse
-                notification.classList.remove('show-notification');
-            }, 3000); // 3000 Millisekunden = 3 Sekunden
-        }
-    </script>
-
-</body>
+    </body>
 </html>
